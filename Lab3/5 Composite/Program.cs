@@ -1,4 +1,7 @@
 ﻿using _5_Composite;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 class Program
 {
@@ -15,6 +18,12 @@ class Program
 
         Console.WriteLine(div.OuterHtml);
 
-
+        HtmlIterator iterator = new HtmlIterator(div);
+        Console.WriteLine("Iterating through HTML document:");
+        while (iterator.HasNext())
+        {
+            var node = iterator.Next();
+            Console.WriteLine(node.OuterHtml);
+        }
     }
 }
