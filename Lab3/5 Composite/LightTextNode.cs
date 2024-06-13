@@ -17,6 +17,10 @@ namespace _5_Composite
 
         public override string OuterHtml => _text;
         public override string InnerHtml => _text;
-    }
 
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 }

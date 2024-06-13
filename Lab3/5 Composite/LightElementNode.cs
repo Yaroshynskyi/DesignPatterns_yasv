@@ -86,6 +86,11 @@ namespace _5_Composite
         {
             return _stateManager.GetState();
         }
+
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
 
