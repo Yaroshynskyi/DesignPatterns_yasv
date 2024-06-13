@@ -14,6 +14,7 @@ namespace _5_Composite
         private List<string> _cssClasses;
         private List<LightNode> _children;
         private LifecycleHooks _lifecycleHooks;
+        private ElementStateManager _stateManager;
 
         public LightElementNode(string tagName, bool isBlock, bool isSelfClosing, LifecycleHooks lifecycleHooks = null)
         {
@@ -24,6 +25,7 @@ namespace _5_Composite
             this._children = new List<LightNode>();
             this._lifecycleHooks = lifecycleHooks ?? new ConcreteLifecycleHooks();
             this._lifecycleHooks.OnCreated(this);
+            this._stateManager = new ElementStateManager(this); // Менеджер станів
         }
 
         public string TagName => _tagName;
@@ -32,6 +34,11 @@ namespace _5_Composite
         {
             _cssClasses.Add(cssClass);
             _lifecycleHooks.OnClassListApplied(this);
+        }
+
+        public void RemoveClass(string cssClass)
+        {
+            _cssClasses.Remove(cssClass);
         }
 
         public void AddChild(LightNode child)
@@ -68,6 +75,16 @@ namespace _5_Composite
         public List<LightNode> GetChildren()
         {
             return _children;
+        }
+
+        public void SetState(string state)
+        {
+            _stateManager.SetState(state);
+        }
+
+        public string GetState()
+        {
+            return _stateManager.GetState();
         }
     }
 

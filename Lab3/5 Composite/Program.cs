@@ -10,6 +10,7 @@ class Program
         LifecycleHooks hooks = new ConcreteLifecycleHooks();
         LightElementNode div = new LightElementNode("div", true, false, hooks);
         div.AddClass("container");
+
         LightTextNode textNode = new LightTextNode("Hello, World!");
         LightElementNode span = new LightElementNode("span", false, false, hooks);
         span.AddChild(new LightTextNode("This is a span."));
@@ -26,7 +27,6 @@ class Program
 
         Console.WriteLine("After undoing last command:");
         Console.WriteLine(div.OuterHtml);
-
         commandManager.ExecuteCommand(new AddElementCommand(div, span));
 
         Console.WriteLine("After re-adding span:");
@@ -39,5 +39,14 @@ class Program
             var node = iterator.Next();
             Console.WriteLine(node.OuterHtml);
         }
+
+        Console.WriteLine("Initial state of div:");
+        Console.WriteLine(div.GetState());
+        div.SetState("Active");
+        Console.WriteLine("State of div after activation:");
+        Console.WriteLine(div.GetState());
+        div.SetState("Inactive");
+        Console.WriteLine("State of div after deactivation:");
+        Console.WriteLine(div.GetState());
     }
 }
