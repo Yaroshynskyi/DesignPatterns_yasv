@@ -27,6 +27,7 @@ class Program
 
         Console.WriteLine("After undoing last command:");
         Console.WriteLine(div.OuterHtml);
+
         commandManager.ExecuteCommand(new AddElementCommand(div, span));
 
         Console.WriteLine("After re-adding span:");
@@ -48,5 +49,9 @@ class Program
         div.SetState("Inactive");
         Console.WriteLine("State of div after deactivation:");
         Console.WriteLine(div.GetState());
+
+        Console.WriteLine("Visiting HTML document:");
+        HtmlVisitor visitor = new HtmlVisitor();
+        div.Accept(visitor);
     }
 }
